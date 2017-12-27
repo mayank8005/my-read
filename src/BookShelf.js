@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import './App.css'
 
 
-// BookShelf class is a class which contain all books
+/* BookShelf is a class which contain all books
+it acts like container to all the books*/
 class BookShelf extends Component{
 
     // render BookShelfs
@@ -24,7 +25,8 @@ class BookShelf extends Component{
                                 backgroundImage: `url("${(book.imageLinks)?book.imageLinks.thumbnail:''}")` }}>
                             </div>
                             <div className="book-shelf-changer">
-                              <select value={book.shelf} onChange={(event)=>this.props.changeShelf(book, event.target.value)}>
+                              <select value={book.shelf} 
+                                onChange={(event)=>this.props.changeShelf(book, event.target.value)}>
                                 <option value="NULL" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>

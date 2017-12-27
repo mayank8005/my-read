@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 
-// will return header of page
+// will return header component of page
 function Header(){
     return(
         <div className="list-books-title">

@@ -12,10 +12,12 @@ class BooksApp extends React.Component {
     books: []
   }
 
+  //This method updates shelf information
   changeShelf = (book, newShelf)=>{
     const bookID= book.id;
     // checking if new book is selected
     const bookExist=this.state.books.find((book)=>book.id===bookID);
+    //if it is a new book
     if(!bookExist){
       book.shelf = newShelf;
       this.setState((state)=>{
@@ -24,6 +26,9 @@ class BooksApp extends React.Component {
         }
       })  
     }else{
+    // updating old book 
+    /*this part will only run if book which is requested to be change shelf already
+    exist in our state*/
     this.setState((state)=>{
       return {
         books: state.books.map((book)=>{
@@ -38,6 +43,7 @@ class BooksApp extends React.Component {
     })}
   }
 
+  //fetching books
   componentDidMount(){
     BooksAPI.getAll().then(books=>(
       this.setState({books})
@@ -60,9 +66,21 @@ class BooksApp extends React.Component {
                 <div className="list-books">
                   <Header/>
                   <div className="list-books-content">
-                      <BookShelf books={this.state.books.filter(book=>book.shelf==='currentlyReading')} shelfName='Currently Reading' changeShelf={this.changeShelf}/>
-                      <BookShelf books={this.state.books.filter(book=>book.shelf==='wantToRead')} shelfName='Want To Read' changeShelf={this.changeShelf}/>
-                      <BookShelf books={this.state.books.filter(book=>book.shelf==='read')} shelfName='Read'changeShelf={this.changeShelf}/>
+                      <BookShelf 
+                        books={this.state.books.filter(book=>book.shelf==='currentlyReading')} 
+                        shelfName='Currently Reading' 
+                        changeShelf={this.changeShelf}
+                      />
+                      <BookShelf 
+                        books={this.state.books.filter(book=>book.shelf==='wantToRead')} 
+                        shelfName='Want To Read' 
+                        changeShelf={this.changeShelf}
+                      />
+                      <BookShelf 
+                        books={this.state.books.filter(book=>book.shelf==='read')} 
+                        shelfName='Read'
+                        changeShelf={this.changeShelf}
+                      />
                   </div>
                   <div className="open-search">
                     <Link to='/search'>Add a book</Link>
@@ -77,4 +95,4 @@ class BooksApp extends React.Component {
   }
 }
 
-export default BooksApp
+export default BooksApp;
