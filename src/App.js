@@ -4,6 +4,8 @@ import './App.css'
 import BookShelf from './BookShelf'
 import Search from './Search'
 import Header from './Header'
+import { Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -41,21 +43,31 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <Search/>
-        ) : (
-          <div className="list-books">
-            <Header/>
-            <div className="list-books-content">
-                <BookShelf books={this.state.books.filter(book=>book.shelf==='currentlyReading')} shelfName='Currently Reading' changeShelf={this.changeShelf}/>
-                <BookShelf books={this.state.books.filter(book=>book.shelf==='wantToRead')} shelfName='Want To Read' changeShelf={this.changeShelf}/>
-                <BookShelf books={this.state.books.filter(book=>book.shelf==='read')} shelfName='Read'changeShelf={this.changeShelf}/>
-            </div>
-            <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-            </div>
-          </div>
-        )}
+          <Route
+            path='/search'
+            render={
+              ()=>(<Search changeShelf={this.changeShelf} books={this.state.books}/>)
+            }
+          />
+          <Route
+            path='/' exact
+            render={
+              ()=>(
+                <div className="list-books">
+                  <Header/>
+                  <div className="list-books-content">
+                      <BookShelf books={this.state.books.filter(book=>book.shelf==='currentlyReading')} shelfName='Currently Reading' changeShelf={this.changeShelf}/>
+                      <BookShelf books={this.state.books.filter(book=>book.shelf==='wantToRead')} shelfName='Want To Read' changeShelf={this.changeShelf}/>
+                      <BookShelf books={this.state.books.filter(book=>book.shelf==='read')} shelfName='Read'changeShelf={this.changeShelf}/>
+                  </div>
+                  <div className="open-search">
+                    <Link to='/search'>Add a book</Link>
+                  </div>
+                </div>
+              )
+            }
+          />
+        
       </div>
     )
   }
