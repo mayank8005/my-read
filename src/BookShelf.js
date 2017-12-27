@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './App.css'
 
 
 /* BookShelf is a class which contain all books
 it acts like container to all the books*/
 class BookShelf extends Component{
+
+    //defining proptypes of this class
+    static propTypes={
+        books: PropTypes.array.isRequired,      //array of books object
+        shelfName: PropTypes.string.isRequired, //name of the shelf
+        changeShelf: PropTypes.func.isRequired  //method to change shelf
+    }
 
     // render BookShelfs
     render(){

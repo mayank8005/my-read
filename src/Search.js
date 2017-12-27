@@ -2,10 +2,16 @@ import React, { Component } from 'react'
 import './App.css'
 import { Link } from 'react-router-dom'
 import * as BookAPI from './BooksAPI'
-import BookShelf from './BookShelf';
+import BookShelf from './BookShelf'
+import PropTypes from 'prop-types'
 
 class Search extends Component{
 
+    //defining proptypes of this class
+    static propTypes={
+        books: PropTypes.array.isRequired,      //array of books
+        changeShelf: PropTypes.func.isRequired  //method to change shelf
+    }
 
     state={
         books:[]
